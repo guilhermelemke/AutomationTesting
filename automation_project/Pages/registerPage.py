@@ -13,13 +13,14 @@ class RegisterPage():
         self.phone = Locators.phone_css_selector
         self.gender_male = Locators.gender_male_css_selector
         self.gender_female = Locators.gender_female_css_selector
-        self.hobbies_cricket = Locators.hobbies_cricket_class_name
-        self.hobbies_movies = Locators.hobbies_movies_class_name
-        self.hobbies_hockey = Locators.hobbies_hockey_class_name
+        self.hobbies_cricket = Locators.hobbies_cricket_css_selector
+        self.hobbies_movies = Locators.hobbies_movies_css_selector
+        self.hobbies_hockey = Locators.hobbies_hockey_css_selector
         self.language = Locators.languages_id
         self.skills = Locators.skills_id
         self.country = Locators.country_id
-        self.select_country = Locators.country_id
+        self.select_country_textbox_css_selector = Locators.select_country_textbox_css_selector
+        self.select_country = Locators.select_country_css_selector
         self.year = Locators.year_id
         self.month = Locators.month_css_selector
         self.day = Locators.day_id
@@ -45,34 +46,44 @@ class RegisterPage():
         self.browser.find_element_by_css_selector(self.gender_female).click()
 
     def hobby_cricket(self):
-        self.browser.find_element_by_class_nome(self.hobbies_cricket).click()
+        self.browser.find_element_by_css_selector(self.hobbies_cricket).click()
 
     def hobby_movies(self):
-        self.browser.find_element_by_class_nome(self.hobbies_movies).click()
+        self.browser.find_element_by_css_selector(self.hobbies_movies).click()
 
     def hobby_hockey(self):
-        self.browser.find_element_by_class_nome(self.hobbies_hockey).click()
+        self.browser.find_element_by_css_selector(self.hobbies_hockey).click()
 
     def fill_language(self, language):
-        self.browser.find_element_by_id(self.language).send_keys(language)
+        selector = self.browser.find_element_by_id(self.language)
+        selector.click()
+        selector.find_element_by_xpath(f"//*[contains(text(), '{language}')]").click()
+        self.browser.find_element_by_xpath("//body").click()
 
     def fill_skills(self, skill):
-        self.browser.find_element_by_id(self.skills).send_keys(skill)
+        selector = self.browser.find_element_by_id(self.skills)
+        selector.click()
+        selector.find_element_by_css_selector(f"[value='{skill}']").click()
 
     def fill_country(self, country):
-        self.browser.find_element_by_id(self.country).send_keys(country)
+        selector = self.browser.find_element_by_id(self.country)
+        selector.click()
+        selector.find_element_by_css_selector(f"[value='{country}']").click()
 
-    def select_country(self, country):
-        self.browser.find_element_by_id(self.select_country).send_keys(country)
+    def fill_select_country(self, country):
+        selector = self.browser.find_element_by_css_selector(self.select_country)
+        selector.click()
+        self.browser.find_element_by_css_selector(self.select_country_textbox_css_selector).send_keys(country)
+        self.browser.find_element_by_css_selector(f"[role='treeitem']").click()
 
     def fill_date(self, year, month, day):
         self.browser.find_element_by_id(self.year).send_keys(year)
         self.browser.find_element_by_css_selector(self.month).send_keys(month)
         self.browser.find_element_by_id(self.day).send_keys(day)
 
-    def fill_passwords(self, password):
+    def fill_passwords(self, password, repeat_password):
         self.browser.find_element_by_id(self.first_password).send_keys(password)
-        self.browser.find_element_by_id(self.second_password).send_keys(password)
+        self.browser.find_element_by_id(self.second_password).send_keys(repeat_password)
 
     def submit(self):
         self.browser.find_element_by_id(self.submit_button).click()
