@@ -16,10 +16,10 @@ class RegisterPage():
         self.hobbies_cricket = Locators.hobbies_cricket_css_selector
         self.hobbies_movies = Locators.hobbies_movies_css_selector
         self.hobbies_hockey = Locators.hobbies_hockey_css_selector
-        self.language = Locators.languages_id
+        #self.language = Locators.languages_id
         self.skills = Locators.skills_id
         self.country = Locators.country_id
-        self.select_country_textbox_css_selector = Locators.select_country_textbox_css_selector
+        #self.select_country_textbox_css_selector = Locators.select_country_textbox_css_selector
         self.select_country = Locators.select_country_css_selector
         self.year = Locators.year_id
         self.month = Locators.month_css_selector
@@ -54,11 +54,11 @@ class RegisterPage():
     def hobby_hockey(self):
         self.browser.find_element_by_css_selector(self.hobbies_hockey).click()
 
-    def fill_language(self, language):
-        selector = self.browser.find_element_by_id(self.language)
-        selector.click()
-        selector.find_element_by_xpath(f"//*[contains(text(), '{language}')]").click()
-        self.browser.find_element_by_xpath("//body").click()
+    #def fill_language(self, language):
+        #selector = self.browser.find_element_by_id(self.language)
+        #selector.click()
+        #selector.find_element_by_xpath(f"//*[contains(text(), '{language}')]").click()
+        #self.browser.find_element_by_xpath("//body").click()
 
     def fill_skills(self, skill):
         selector = self.browser.find_element_by_id(self.skills)
@@ -70,11 +70,11 @@ class RegisterPage():
         selector.click()
         selector.find_element_by_css_selector(f"[value='{country}']").click()
 
-    def fill_select_country(self, country):
-        selector = self.browser.find_element_by_css_selector(self.select_country)
-        selector.click()
-        self.browser.find_element_by_css_selector(self.select_country_textbox_css_selector).send_keys(country)
-        self.browser.find_element_by_css_selector(f"[role='treeitem']").click()
+    #def fill_select_country(self, country):
+        #selector = self.browser.find_element_by_css_selector(self.select_country)
+        #selector.click()
+        #self.browser.find_element_by_css_selector(self.select_country_textbox_css_selector).send_keys(country)
+        #self.browser.find_element_by_css_selector(f"[role='treeitem']").click()
 
     def fill_date(self, year, month, day):
         self.browser.find_element_by_id(self.year).send_keys(year)
